@@ -11,17 +11,17 @@ dishRouter.route('/')
         res.setHeader('Content-Type', 'text/plain');
         next();
     })
-    .get((req, res, next) => {
+    .get((req, res) => {
         res.end('Will send all the dishes to you!');
     })
-    .post((req, res, next) => {
+    .post((req, res) => {
         res.end('Will add the dish: ' + req.body.name + ' with details: ' + req.body.description);
     })
-    .put((req, res, next) => {
+    .put((req, res) => {
         req.statusCode = 403;
         res.end('PUT operation not supported on /dishes');
     })
-    .delete((req, res, next) => {
+    .delete((req, res) => {
         res.end('Deleting all the dishes!');
     });
 
@@ -31,18 +31,18 @@ dishRouter.route('/:dishId')
         res.setHeader('Content-Type', 'text/plain');
         next();
     })
-    .get((req, res, next) => {
+    .get((req, res) => {
         res.end('Will send the details of the dish: ' + req.params.dishId + ' to you!');
     })
-    .post((req, res, next) => {
+    .post((req, res) => {
         req.statusCode = 403;
         res.end('POST operation not supported on /dishes/' + req.params.dishId);
     })
-    .put((req, res, next) => {
+    .put((req, res) => {
         res.write('Updating the dish: ' + req.params.dishId + '\n');
         res.end('Will update the dish: ' + req.body.name + ' with details: ' + req.body.description);
     })
-    .delete((req, res, next) => {
+    .delete((req, res) => {
         res.end('Deleting dish: ' + req.params.dishId);
     });
 
