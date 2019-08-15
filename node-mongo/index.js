@@ -16,27 +16,27 @@ MongoClient.connect(url).then((client) => {
         .then((result) => {
             console.log('Insert Document:\n', result.ops);
 
-            return dboper.findDocuments(db, dishCollectionName)
-                .then((docs) => {
-                    console.log('Found Documents:\n', docs);
-
-                    return dboper.updateDocument(db, {name: 'Vadonut'}, {description: 'Updated Test'}, dishCollectionName)
-                        .then((result) => {
-                            console.log('Updated Document:\n', result.result);
-
-                            return dboper.findDocuments(db, dishCollectionName)
-                                .then((docs) => {
-                                    console.log('Found Documents:\n', docs);
-
-                                    return db.dropCollection(dishCollectionName)
-                                        .then((result) => {
-                                            console.log('Dropped Collection: ', result);
-
-                                            client.close();
-                                        })
-                                        .catch((err) => console.log(err));
-                                })
-                        })
-                })
+            return dboper.findDocuments(db, dishCollectionName);
         })
+        .then((docs) => {
+            console.log('Found Documents:\n', docs);
+
+            return dboper.updateDocument(db, {name: 'Vadonut'}, {description: 'Updated Test'}, dishCollectionName);
+        })
+        .then((result) => {
+            console.log('Updated Document:\n', result.result);
+
+            return dboper.findDocuments(db, dishCollectionName);
+        })
+        .then((docs) => {
+            console.log('Found Documents:\n', docs);
+
+            return db.dropCollection(dishCollectionName);
+        })
+        .then((result) => {
+            console.log('Dropped Collection: ', result);
+
+            client.close();
+        }).catch((err) => console.log(err));
+
 }).catch((err) => console.log(err));
