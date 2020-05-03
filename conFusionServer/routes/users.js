@@ -16,8 +16,12 @@ router.get('/', cors.corsWithOptions, authenticate.verifyUser, authenticate.veri
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(users);
-          }, (err) => next(err))
-          .catch((err) => next(err));
+          })
+          .catch((err) => {
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.json({err: err});
+          });
     });
 
 router.post('/signup', cors.corsWithOptions, (req, res, next) => {
