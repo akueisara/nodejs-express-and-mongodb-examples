@@ -1,40 +1,19 @@
 {
-  "name": "dishes",
+  "name": "Comment",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "string",
-      "required": true
-    },
-    "category": {
-      "type": "string",
-      "required": true
-    },
-    "image": {
-      "type": "string",
-      "required": true
-    },
-    "label": {
-      "type": "string",
-      "required": true
-    },
-    "price": {
-      "type": "string",
+    "rating": {
+      "type": "number",
       "required": true,
-      "default": "0"
+      "default": 5
     },
-    "featured": {
-      "type": "boolean",
-      "required": true,
-      "default": false
+    "comment": {
+      "type": "string",
+      "required": true
     }
   },
   "mixins": {
@@ -42,15 +21,15 @@
   },
   "validations": [],
   "relations": {
-    "comments": {
-      "type": "hasMany",
-      "model": "Comment",
+    "dishes": {
+      "type": "belongsTo",
+      "model": "dishes",
       "foreignKey": ""
     },
-    "favorites": {
-      "type": "hasMany",
-      "model": "Favorite",
-      "foreignKey": ""
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerId"
     }
   },
   "acls": [
@@ -63,20 +42,20 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$authenticated",
       "permission": "ALLOW"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "create"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$owner",
       "permission": "ALLOW"
     }
   ],

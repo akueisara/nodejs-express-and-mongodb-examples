@@ -33,6 +33,9 @@
       "default": false
     }
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "validations": [],
   "relations": {},
   "acls": [
@@ -54,6 +57,12 @@
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "create"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
